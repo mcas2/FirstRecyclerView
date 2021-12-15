@@ -1,6 +1,7 @@
 package com.mcas2.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> lDivisas;
-    private ArrayList<Double> facCambio;
+    private ArrayList<String> lDivisas = new ArrayList<>();
+    private ArrayList<Double> facCambio = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         rvDivisas.setLayoutManager(managerLayout);
         MiAdaptador adaptador = new MiAdaptador(this, lDivisas);
         rvDivisas.setAdapter(adaptador);
+
+        DividerItemDecoration decorator = new DividerItemDecoration(
+                rvDivisas.getContext(), managerLayout.getOrientation());
+        rvDivisas.addItemDecoration(decorator);
     }
 
     private void fillDivisas (){
