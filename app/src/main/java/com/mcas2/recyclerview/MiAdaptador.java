@@ -1,6 +1,8 @@
 package com.mcas2.recyclerview;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,13 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.ViewHolder> {
 
     private ArrayList<String> lDivisas;
     private LayoutInflater inflater;
+    private TextView ultimaSeleccion;
+    private int posicionUltimaSeleccion;
 
-    MiAdaptador(Context context, ArrayList<String> lDivisas){
+    MiAdaptador(Context context, ArrayList<String> lDivisas) {
         this.lDivisas = lDivisas;
         this.inflater = LayoutInflater.from(context);
+        posicionUltimaSeleccion = -1; //es importante marcarlo
     }
 
     @NonNull
@@ -37,7 +42,17 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TextView divisa = v.findViewById(R.id.tvDivisa);
+                if (divisa == ultimaSeleccion){
+                    posicionUltimaSeleccion = -1;
+                    ultimaSeleccion = null;
+                    divisa.setBackgroundColor(Color.WHITE);
+                } else {
+                    if (ultimaSeleccion!=null) ultimaSeleccion.setBackgroundColor(Color.WHITE);
+                    divisa.setBackgroundColor(Color.BLUE);
+                    posicionUltimaSeleccion = position;
+                    ultimaSeleccion = divisa;
+                }
             }
         });
     }
@@ -54,6 +69,10 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.ViewHolder> {
             super(item);
             tvDivisa = item.findViewById(R.id.tvDivisa);
         }
+    }
+
+    public int getElementoSeleccionado(){
+        return this.posicionUltimaSeleccion;
     }
 
 }

@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,6 +35,33 @@ public class MainActivity extends AppCompatActivity {
         DividerItemDecoration decorator = new DividerItemDecoration(
                 rvDivisas.getContext(), managerLayout.getOrientation());
         rvDivisas.addItemDecoration(decorator);
+
+        Button convertir = (Button) findViewById(R.id.convertir);
+        convertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        Switch switchVIP = (Switch) findViewById(R.id.switchVIP);
+        switchVIP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    public void cambiar(boolean VIP, int posicion){
+        TextView resultado = findViewById(R.id.resultado);
+        if (posicion!=-1){
+            try {
+
+            } catch (NumberFormatException e){
+                resultado.setText("Introduce un dato válido");
+            }
+        }
     }
 
     private void fillDivisas (){
