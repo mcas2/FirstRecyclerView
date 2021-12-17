@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -36,19 +37,22 @@ public class MainActivity extends AppCompatActivity {
                 rvDivisas.getContext(), managerLayout.getOrientation());
         rvDivisas.addItemDecoration(decorator);
 
+
+        Switch switchVIP = (Switch) findViewById(R.id.switchVIP);
+
         Button convertir = (Button) findViewById(R.id.convertir);
         convertir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cambiar(switchVIP.isChecked(), adaptador.getElementoSeleccionado());
             }
         });
 
-        Switch switchVIP = (Switch) findViewById(R.id.switchVIP);
+
         switchVIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cambiar(switchVIP.isChecked(), adaptador.getElementoSeleccionado());
             }
         });
     }
@@ -57,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
         TextView resultado = findViewById(R.id.resultado);
         if (posicion!=-1){
             try {
-
+                EditText etCantidad = (EditText) findViewById(R.id.entradaEuros);
+                double euros = Double.parseDouble(etCantidad.getText().toString());
+                double cambio = VIP? facCambio.get(posicion):facCambio.get(posicion)*1.01;
+                resultado.setText(""+cambio*euros);
             } catch (NumberFormatException e){
                 resultado.setText("Introduce un dato válido");
             }
